@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 public class AppTest {
 
     private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private final PrintStream printStream = System.out;
 
     @Before
     public void setUpStreams(){
@@ -23,17 +24,14 @@ public class AppTest {
     @Test
     public void testAppMain(){
         App.main(null);
-        try {
-            assertEquals("Hello World"+System.getProperty("line.separator"), outputStream.toString());
-        } catch (Exception e){
-            fail("message is not hello world");
-        }
+        assertEquals("Hello World" + System.getProperty("line.separator"), outputStream.toString());
+
         //assertEquals("Hello World","Hello World");
     }
 
 
     @After
     public void cleanUpStream(){
-        System.setOut(null);
+        System.setOut( printStream );
     }
 }
